@@ -2,7 +2,6 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
 const path = require('path');
-//const nodeChallenge = require("./utils/generateMarkdown");
 const generateMarkdown = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 const questions = [ 
@@ -39,6 +38,11 @@ const questions = [
     },
     {
         type: "input",
+        message: "Please enter your email.",
+        name: "email"
+    },
+    {
+        type: "input",
         message: "what are the guidelines for contributing to this document?",
         name: "contribution"
     },
@@ -52,29 +56,33 @@ const questions = [
         message: "How will you be testing this?",
         name: "test"
     },
-    // .then(function ({license, inquirer, nodeChallenge, generateMarkdown}) {
+];
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) { //writes the structure
+    fs.writeFileSync(fileName, data) //writes file in this format at 78 inside init()
+    //could add 'README.md' right here.
+};
+// TODO: Create a function to initialize app
+function init() {
+    inquirer.prompt(questions)//
+    .then((inquirerResponses) => {
+        console.log(inquirerResponses);
+        writeToFile('README.md', generateMarkdown({...inquirerResponses}));
+        writeToFile('filename.md', `${inquirerResponses}`)
+    })
+};
+init();
+//console.log(questions);//this is getting through
+//generateMarkdown(inquirerResponses)//This is the problem spot? 
+// .then(function ({license, inquirer, nodeChallenge, generateMarkdown}) {
     //     const htmlPage = createHTML(license, inquirer, nodeChallenge, generateMarkdown);
     //     console.log(htmlPage);
     //     fs.writeFile("index.html", htmlPage, (err) => 
     //     err ? console.log(err) : console.log("html created"));
     // })
-];
-//console.log(questions);//this is getting through
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFileSync(fileName, data)
-};
-// TODO: Create a function to initialize app
-function init() {
-    inquirer.prompt(questions)//can't read prompt?
-    .then((inquirerResponses) => {
-        console.log("arc", inquirerResponses);
-        //generateMarkdown(inquirerResponses)//This is the problem spot? 
-        writeToFile('README.md', generateMarkdown({...inquirerResponses}));
-    })
-};
+//filename, data = gene...
 // Function call to initialize app
-init();
+
 // const userName = questions.userName
 // axios.get(`https://api.github.com/users/${userName}`)
 // .then(questions => {

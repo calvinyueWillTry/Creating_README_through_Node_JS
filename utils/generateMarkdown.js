@@ -1,7 +1,7 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  console.log("one")
+  //console.log("one")
   if (license === "Apache 2.0") {
     return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
   } 
@@ -11,7 +11,7 @@ function renderLicenseBadge(license) {
   else if (license === "SD 2 Clause") {
     return `[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)`
   }
-  else if (license === "Morzilla Public License 2.0") {
+  else if (license === "Mozilla Public License 2.0") {
     return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
   }
   else {
@@ -21,14 +21,14 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(link) { //add one for github link?
-  console.log("two")
+  //console.log("two")
   return `The Github link is `+link;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string, needs if/else statement
 function renderLicenseSection(license) { //what company the license is with?
-  console.log("three")
+  //console.log("three")
   if (license === "Apache 2.0") {
     return `https://www.apache.org/licenses/LICENSE-2.0`
   } 
@@ -45,12 +45,11 @@ function renderLicenseSection(license) { //what company the license is with?
     return `The ${license} was not included in this array of options`
   }
 }
-//[Link] (#link) and [How to Contribute] (#how to contribute) not working
+//readME is very space sensitive
 const  createreadME = (data) => {
   return `# ${data.title}
   
   ## Description
-  
   ${data.description}
   
   ## Table of Contents 
@@ -59,14 +58,13 @@ const  createreadME = (data) => {
   - [Usage](#usage)
   - [Credits](#credits)
   - [License](#license)
-  - [Link] (#link) 
-  - [How to Contribute] (#how to contribute)
+  - [Link](#link) 
+  - [How_to_Contribute](#how_to_contribute)
   
   ## Installation
   ${data.instructions}
   
   ## Usage
-  
   ${data.usage}
   
   ## Credits
@@ -76,14 +74,17 @@ const  createreadME = (data) => {
   ${renderLicenseBadge (data.license)}
   ${renderLicenseSection (data.license)}
 
-  ##Link
+  ## Link
   ${renderLicenseLink(data.link)}
   
-  ## How to Contribute
+  ## How_to_Contribute
   ${data.contribution}
 
   🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
   
+  ## email
+${data.email}
+
   ## Tests
   ${data.test}
   
@@ -96,12 +97,11 @@ const  createreadME = (data) => {
 };
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) { //the only one being exported. License from string under question.name in other JS.
-console.log("signal flowing")
-return createreadME(data);
+  return createreadME(data);
+}
+module.exports = generateMarkdown;
+//console.log("signal flowing")
 //   return `# ${data.title} 
 // ${renderLicenseBadge(data.license)}
 // ${renderLicenseLink(data.license)} 
 // ${renderLicenseSection(data.license)}`
-;
-}
-module.exports = generateMarkdown;
